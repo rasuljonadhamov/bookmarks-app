@@ -90,6 +90,97 @@ a:active {
   margin-right: 5px;
 }
 
+/* Modal */
+
+.modal-container {
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: none;
+}
+
+.show-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  max-width: 95%;
+  width: 500px;
+  animation: modalopen 1s;
+  border-radius: var(--border-radius);
+}
+
+.close-icon {
+  position: relative;
+  top: 13px;
+  right: 13px;
+  font-size: 24px;
+  float: right;
+  color: white;
+}
+
+.modal-header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 15px;
+}
+
+.modal-content {
+  padding: 20px;
+  background-color: whitesmoke;
+}
+
+/* Form */
+.form-group {
+  height: 55px;
+}
+
+.form-input {
+  width: 97%;
+  padding: 5px;
+  border: 2px solid var(--primary-color);
+  border-radius: var(--border-radius);
+  display: block;
+  outline: none;
+}
+
+.form-label {
+  display: block;
+  color: var(--primary-color);
+}
+
+button {
+  cursor: pointer;
+  background: var(--primary-color);
+  color: white;
+  height: 30px;
+  width: 100px;
+  border: none;
+  border-radius: var(--border-radius);
+  margin-top: 10px;
+}
+
+button:hover {
+  filter: brightness(110%);
+}
+
+@keyframes modalopen {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .container {
     flex-direction: column;
