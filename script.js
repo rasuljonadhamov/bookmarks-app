@@ -6,9 +6,12 @@ const websiteNameEl = document.getElementById("website-name");
 const websiteUrlEl = document.getElementById("website-url");
 const bookmarksContainer = document.getElementById("bookmarks-container");
 
+let bookmarks = [];
+
 // Show moal
 function showModal() {
   modal.classList.add("show-modal");
+  websiteNameEl.focus();
 }
 
 // Add event listeners
@@ -39,17 +42,46 @@ function validate(nameValue, urlValue) {
   return true;
 }
 
+// Fetch
+function fetchLocalBookmarks() {
+  if (localStorage.getItem("bookmarks")) {
+    bookmarks = JSON.parse(localStorage.getItem("bookmarks"));
+  } else {
+    bookmarks = [
+      {
+        name: "Rasuljon Adhamov",
+        url: "https://github.com/rasuljonadhamov",
+      },
+    ];
+    localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+  }
+  console.log(bookmarks);
+}
+
 // Store bookmark
 function storeBookmark(ev) {
   ev.preventDefault();
   const nameValue = websiteNameEl.value;
   let urlValue = websiteUrlEl.value;
   if (!urlValue.includes("http://", "https://")) {
-    urlValue += `https://${urlValue}`;
+    urlValue = `https://${urlValue}`;
   }
   if (!validate(nameValue, urlValue)) {
     return false;
   }
+
+  const bookmark = {
+    name: nameValue,
+    url: urlValue,
+  };
+
+  bookmarks.push(bookmark);
+  localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+  fetchLocalBookmarks();
+  bookmarkForm.reset();
+  websiteNameEl.focus();
 }
 
 bookmarkForm.addEventListener("submit", storeBookmark);
+
+fetchLocalBookmarks();
