@@ -44,6 +44,9 @@ function validate(nameValue, urlValue) {
 
 // Built bookmarks
 function builtBookmarks() {
+  // Delete
+  bookmarksContainer.textContent = "";
+
   bookmarks.forEach((bookmark) => {
     const { name, url } = bookmark;
     // item
@@ -90,6 +93,18 @@ function fetchLocalBookmarks() {
     localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
   }
   builtBookmarks();
+}
+
+// delete Bookmark
+function deleteBookmark(url) {
+  bookmarks.forEach((bookmark, i) => {
+    if (bookmark.url === url) {
+      bookmarks.splice(i, 1);
+    }
+  });
+
+  localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+  fetchLocalBookmarks();
 }
 
 // Store bookmark
